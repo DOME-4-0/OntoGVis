@@ -1,0 +1,104 @@
+{
+  "query": "molecular",
+  "results": {
+    "channels": [
+      {
+        "A": "channel123",
+        "B": "Molecular Biology Insights",
+        "subscribers": 45000,
+        "videos": [
+          {
+            "video_id": "video1234",
+            "title": "Introduction to Molecular Bonds",
+            "description": "A detailed look at the types of molecular bonds and their roles in biology.",
+            "views": 15000,
+            "duration": "10:02",
+            "upload_date": "2023-01-15",
+            "comments": [
+              {
+                "comment_id": "comment1",
+                "user": "User123",
+                "comment": "Very informative, thanks for the clear explanation!",
+                "timestamp": "2023-01-16"
+              }
+            ]
+          },
+          {
+            "video_id": "video1235",
+            "title": "Molecular Genetics Explained",
+            "description": "Explaining the basics of molecular genetics and DNA replication processes.",
+            "views": 25000,
+            "duration": "15:45",
+            "upload_date": "2023-02-10",
+            "comments": [
+              {
+                "comment_id": "comment2",
+                "user": "BioFan84",
+                "comment": "This really helped with my studies, great video!",
+                "timestamp": "2023-02-11"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "channel_id": "channel124",
+        "channel_name": "Chemistry Fundamentals",
+        "channel_description": "A channel that breaks down complex chemical concepts into understandable segments.",
+        "subscribers": 30000,
+        "videos": [
+          {
+            "video_id": "video2234",
+            "title": "The Role of Molecules in Everyday Chemistry",
+            "description": "An overview of how molecules interact in everyday products and reactions.",
+            "views": 20000,
+            "duration": "12:30",
+            "upload_date": "2023-03-05"
+          }
+        ]
+      }
+    ],
+    "playlists": [
+      {
+        "playlist_id": "playlist345",
+        "title": "Molecular Biology 101",
+        "description": "A playlist to get you started with molecular biology, from the basics to advanced topics.",
+        "videos": [
+          {
+            "video_id": "video3456",
+            "title": "What is a Molecule?",
+            "description": "A beginner's guide to understanding what molecules are and their significance.",
+            "views": 10000,
+            "duration": "5:00",
+            "upload_date": "2023-01-01"
+          },
+          {
+            "video_id": "video3457",
+            "title": "Proteins and Enzymes",
+            "description": "Exploring the structure and function of proteins and enzymes in molecular biology.",
+            "views": 12000,
+            "duration": "8:00",
+            "upload_date": "2023-01-08"
+          }
+        ],
+        "sub_playlists": [
+          {
+            "sub_playlist_id": "sub_playlist678",
+            "title": "Advanced Molecular Techniques",
+            "description": "Deep dive into sophisticated molecular biology techniques used in research.",
+            "videos": [
+              {
+                "video_id": "video6789",
+                "title": "CRISPR-Cas9 Genetic Editing",
+                "description": "An in-depth tutorial on CRISPR-Cas9, the groundbreaking gene-editing technology.",
+                "views": 22000,
+                "duration": "18:00",
+                "upload_date": "2023-04-01"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

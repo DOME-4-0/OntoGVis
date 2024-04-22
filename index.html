@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Network Visualization from JSON</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #333;
+        color: #fff;
+        margin: 0;
+        padding: 20px;
+      }
+      #mynetwork {
+        width: 100%;
+        height: 80vh;
+        border: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+      input[type="file"] {
+        padding: 10px;
+        background: #444;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      h1 {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DOME Interactive Network Visualization from JSON demo</h1>
+    <p>v0.4.3 Roberto Bendinelli</p>
+    <input type="file" id="fileInput" accept=".json" />
+    <div id="mynetwork"></div>
+    <script type="text/javascript">
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", handleFileSelect, false); // Event listener for file selection
+
+      function handleFileSelect(event) {
+        const file = event.target.files[0]; //gets the file
+        if (file.type && file.type.indexOf("json") === -1) { //checks if the file is a json
+          console.log("Not a JSON file!");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (fileEvent) {
+          const data = JSON.parse(fileEvent.target.result);
+          createNetwork(data);
+        };
+        reader.readAsText(file);
+      }
+
+      function createNetwork(data) {
+        const nodes = [];
+        const edges = [];
+
+        function getColor(level) {
+          // For now define the gradient in costants, maybe later make it automatic?
+          const colors = [
+            "#e63946", // Red
+            "#ff5964", 
+            "#ff7b82", 
+            "#ff9ba1", 
+            "#ffb5bb", 
+            "#ffd6e0", // Pink
+          ];
+          return colors[Math.min(level, colors.length) - 1];
+        }
+
+        function traverse(jsonObject, parentId = null, level = 1) { // Recursive function to traverse JSON object
+          if (typeof jsonObject !== "object" || jsonObject === null) return;
+
+          Object.entries(jsonObject).forEach(([key, value]) => {
+            if (
+              Array.isArray(value) ||
+              (typeof value === "object" &&
+                value !== null &&
+                !(value instanceof Date))
+            ) {
+              let nodeId =
+                value.id ||
+                value.video_id ||
+                value.channel_id ||
+                value.playlist_id ||
+                value.comment_id ||
+                key;
+              if (!nodeId || typeof nodeId !== "string")
+                nodeId = key + Math.random(); // Unique fallback
+
+              const baseSize = 50; // Max size for root level nodes
+              const decrementPerLevel = 5; // Size reduction per depth level
+              const nodeSize = baseSize - level * decrementPerLevel;
+
+              if (!nodes.some((node) => node.id === nodeId)) { // Here it adds a node if not already added
+                nodes.push({
+                  id: nodeId,
+                  label: nodeId,
+                  value: Math.max(10, nodeSize),
+                  color: {
+                    background: getColor(level),
+                    border: "#222",
+                    highlight: {
+                      background: getColor(level),
+                      border: "#888",
+                    },
+                  },
+                });
+              }
+
+              if (parentId) {
+                edges.push({ from: parentId, to: nodeId });
+              }
+
+              traverse(value, nodeId, level + 1);
+            }
+          });
+        }
+
+        traverse(data);
+
+        //VISJS ELEMENTS
+
+        const visNodes = new vis.DataSet(nodes); // Create vis.js DataSet for NODES
+        const visEdges = new vis.DataSet(edges); // Create vis.js DataSet for EDGES
+        const networkData = { nodes: visNodes, edges: visEdges };
+        const options = {
+          nodes: {
+            shape: "dot",
+            scaling: {
+              min: 10,
+              max: 50,
+              label: {
+                min: 8,
+                max: 30,
+                drawThreshold: 12,
+                maxVisible: 20,
+              },
+            },
+            font: {
+              size: 12,
+              face: "Roboto",
+              color: "#ffffff",
+            },
+          },
+          edges: {
+            smooth: {
+              type: "dynamic",
+            },
+            color: "rgba(255,255,255,0.5)",
+          },
+          physics: {
+            enabled: true,
+            stabilization: false,
+          },
+        };
+
+        const container = document.getElementById("mynetwork");
+        new vis.Network(container, networkData, options);
+      }
+    </script>
+  </body>
+</html>
