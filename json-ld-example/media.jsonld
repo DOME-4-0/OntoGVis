@@ -1,0 +1,113 @@
+[
+  {
+    "@id": "https://dome40.eu/2",
+    "@type": [
+      "https://dome40.eu/media#Video"
+    ],
+    "https://dome40.eu/media#hasTitle": [
+      {
+        "@value": "Video2"
+      }
+    ]
+  },
+  {
+    "@id": "https://dome40.eu/1",
+    "@type": [
+      "https://dome40.eu/media#Video"
+    ],
+    "https://dome40.eu/media#hasTitle": [
+      {
+        "@value": "Video1"
+      }
+    ]
+  },
+  {
+    "@id": "https://dome40.eu/media#Video",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Video"
+      }
+    ]
+  },
+  {
+    "@id": "https://dome40.eu/media#Playlist",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "Playlist"
+      }
+    ]
+  },
+  {
+    "@id": "https://dome40.eu/A",
+    "@type": [
+      "https://dome40.eu/media#Playlist"
+    ],
+    "https://dome40.eu/media#contains": [
+      {
+        "@id": "https://dome40.eu/1"
+      },
+      {
+        "@id": "https://dome40.eu/2"
+      }
+    ],
+    "https://dome40.eu/media#hasTitle": [
+      {
+        "@value": "PlaylistA"
+      }
+    ]
+  },
+  {
+    "@id": "https://dome40.eu/media#hasTitle",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#FunctionalProperty",
+      "http://www.w3.org/2002/07/owl#DatatypeProperty"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2001/XMLSchema#string"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "hasTitle"
+      }
+    ]
+  },
+  {
+    "@id": "https://dome40.eu/media#contains",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#ObjectProperty"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://dome40.eu/media#Playlist"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+      {
+        "@language": "en",
+        "@value": "to have something inside or include something as a part"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "https://dome40.eu/media#Video"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#prefLabel": [
+      {
+        "@language": "en",
+        "@value": "contains"
+      }
+    ]
+  }
+]

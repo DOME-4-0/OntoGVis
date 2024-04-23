@@ -1,0 +1,32 @@
+@prefix media: <https://dome40.eu/media#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://dome40.eu/media#Playlist> a owl:Class ;
+    skos:prefLabel "Playlist"@en .
+
+<https://dome40.eu/media#Video> a owl:Class ;
+    skos:prefLabel "Video"@en .
+
+<https://dome40.eu/media#contains> a owl:ObjectProperty ;
+    rdfs:isDefinedBy "to have something inside or include something as a part"@en ;
+    rdfs:domain media:Playlist ;
+    rdfs:range media:Video ;
+    skos:prefLabel "contains"@en .
+
+<https://dome40.eu/media#hasTitle> a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:range xsd:string ;
+    skos:prefLabel "hasTitle"@en .
+
+<https://dome40.eu/A> a media:Playlist ;
+    media:hasTitle "PlaylistA"^^xsd:string ;
+    media:contains <https://dome40.eu/1> ;
+    media:contains <https://dome40.eu/2> .
+
+<https://dome40.eu/1> a media:Video ;
+    media:hasTitle "Video1"^^xsd:string .
+
+<https://dome40.eu/2> a media:Video ;
+    media:hasTitle "Video2"^^xsd:string .
