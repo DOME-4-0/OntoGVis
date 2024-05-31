@@ -1,0 +1,193 @@
+@prefix domeES: <http://dome40.eu/semantics/dome4.0_core#> .
+@prefix mio: <http://www.ddmd.io/mio/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/dataset/1> a domeES:data_set ;
+    domeES:comment "Comment1" ;
+    domeES:hasPart <http://example.com/data/1> ;
+    domeES:label "Label1" ;
+    domeES:platform_type "PlatformType1" ;
+    domeES:type "Type1" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/10> a domeES:data_set ;
+    domeES:comment "Comment10" ;
+    domeES:hasPart <http://example.com/data/10> ;
+    domeES:label "Label10" ;
+    domeES:platform_type "PlatformType10" ;
+    domeES:type "Type10" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/2> a domeES:data_set ;
+    domeES:comment "Comment2" ;
+    domeES:hasPart <http://example.com/data/2> ;
+    domeES:label "Label2" ;
+    domeES:platform_type "PlatformType2" ;
+    domeES:type "Type2" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/3> a domeES:data_set ;
+    domeES:comment "Comment3" ;
+    domeES:hasPart <http://example.com/data/3> ;
+    domeES:label "Label3" ;
+    domeES:platform_type "PlatformType3" ;
+    domeES:type "Type3" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/4> a domeES:data_set ;
+    domeES:comment "Comment4" ;
+    domeES:hasPart <http://example.com/data/4> ;
+    domeES:label "Label4" ;
+    domeES:platform_type "PlatformType4" ;
+    domeES:type "Type4" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/5> a domeES:data_set ;
+    domeES:comment "Comment5" ;
+    domeES:hasPart <http://example.com/data/5> ;
+    domeES:label "Label5" ;
+    domeES:platform_type "PlatformType5" ;
+    domeES:type "Type5" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/6> a domeES:data_set ;
+    domeES:comment "Comment6" ;
+    domeES:hasPart <http://example.com/data/6> ;
+    domeES:label "Label6" ;
+    domeES:platform_type "PlatformType6" ;
+    domeES:type "Type6" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/7> a domeES:data_set ;
+    domeES:comment "Comment7" ;
+    domeES:hasPart <http://example.com/data/7> ;
+    domeES:label "Label7" ;
+    domeES:platform_type "PlatformType7" ;
+    domeES:type "Type7" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/8> a domeES:data_set ;
+    domeES:comment "Comment8" ;
+    domeES:hasPart <http://example.com/data/8> ;
+    domeES:label "Label8" ;
+    domeES:platform_type "PlatformType8" ;
+    domeES:type "Type8" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/dataset/9> a domeES:data_set ;
+    domeES:comment "Comment9" ;
+    domeES:hasPart <http://example.com/data/9> ;
+    domeES:label "Label9" ;
+    domeES:platform_type "PlatformType9" ;
+    domeES:type "Type9" ;
+    mio:hasPart domeES:data_creator,
+        domeES:data_publisher,
+        domeES:description,
+        domeES:issued_date,
+        domeES:license,
+        domeES:semantic_keyword,
+        domeES:syntactic_keyword,
+        domeES:title,
+        domeES:web_platform .
+
+<http://example.com/data/1> a domeES:data ;
+    domeES:hasValue 8.077447e+00 .
+
+<http://example.com/data/10> a domeES:data ;
+    domeES:hasValue 4.351884e+00 .
+
+<http://example.com/data/2> a domeES:data ;
+    domeES:hasValue 6.619834e+00 .
+
+<http://example.com/data/3> a domeES:data ;
+    domeES:hasValue 2.019491e+00 .
+
+<http://example.com/data/4> a domeES:data ;
+    domeES:hasValue 3.175639e+00 .
+
+<http://example.com/data/5> a domeES:data ;
+    domeES:hasValue 6.029746e+00 .
+
+<http://example.com/data/6> a domeES:data ;
+    domeES:hasValue 4.316173e+00 .
+
+<http://example.com/data/7> a domeES:data ;
+    domeES:hasValue 9.117797e+00 .
+
+<http://example.com/data/8> a domeES:data ;
+    domeES:hasValue 4.83214e+00 .
+
+<http://example.com/data/9> a domeES:data ;
+    domeES:hasValue 1.901588e+00 .

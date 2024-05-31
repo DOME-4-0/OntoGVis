@@ -1,0 +1,518 @@
+prefix dc: <http://purl.org/dc/elements/1.1/>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix err: <http://www.w3.org/2005/xqt-errors#>
+prefix fn: <http://www.w3.org/2005/xpath-functions#>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix fti: <http://franz.com/ns/allegrograph/2.2/textindex/>
+prefix keyword: <http://franz.com/ns/keyword#>
+prefix nd: <http://franz.com/ns/allegrograph/5.0/geo/nd#>
+prefix ndfn: <http://franz.com/ns/allegrograph/5.0/geo/nd/fn#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix xs: <http://www.w3.org/2001/XMLSchema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#IUPAC_INCHI> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_STANDARD_IDENTIFIERS> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_identifier> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#EC_NUMBER> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_STANDARD_IDENTIFIERS> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_identifier> . 
+skos:exactMatch rdf:type owl:AnnotationProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:anyURI ; 
+  rdfs:comment "Points to a URL that is relevant for the platform (e.g., homepage, querying, etc)"^^xs:string ; 
+  rdf:type owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:boolean ; 
+  rdf:type owl:FunctionalProperty , 
+    owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#TOPOGRAPHY> skos:exactMatch <http://data.europa.eu/8mn/euroscivoc/ec42c1af-69f5-4d98-ad25-529315c5ffe0> ; 
+  skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> , 
+    skos:Concept , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_STANDARD_API_SPECIFICATIONS> skos:prefLabel "List of API spefications"^^xs:string ; 
+  rdfs:comment "A (toy, but Dome4.0-related) set of widely-used API specifications that users and providers could select from."^^xs:string ; 
+  rdf:type owl:NamedIndividual , 
+    skos:ConceptScheme . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#OBSERVATIONAL_DATA> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#INTERACTIVE_APP_PROVIDER> rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#interactive_app_provider> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_api_specification> rdfs:label "Standard API specification"^^xs:string ; 
+  rdfs:comment "An API specification that is followed by multiple platforms, e.g., OPTIMADE or IDS."^^xs:string ; 
+  rdfs:subClassOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#api_specification> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/example.ttl#CHEMEO> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "true"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> "https://www.chemeo.com/"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#MATERIAL_PROPERTY> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "http://chemeo_connector:6000"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "Chemeo"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "Chemeo is an open, high quality chemical properties database."^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_api_documentation> "https://www.chemeo.com/api/v1/swagger.json"^^xs:anyURI . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#JSON-LD> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "JavaScript Object Notation for Linking Data (JSON-LD)"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.8f9bbb"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> rdfs:label "Topic"^^xs:string ; 
+  rdfs:comment "Topic, theme, domain - to be taken from a widely used list (such as DFG list of disciplines or EuroSciVoc)."^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#annotation> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_sso_compatible> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:boolean ; 
+  rdfs:comment "Boolean property on whether the platform is compatible with DOME4.0 SSO (Single Sign On) "^^xs:string ; 
+  rdf:type owl:FunctionalProperty , 
+    owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#NAVIGATION_SYSTEMS> skos:exactMatch <http://data.europa.eu/8mn/euroscivoc/ef5a7186-be0b-490c-850f-3b94fbe329e1> ; 
+  skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> , 
+    skos:Concept , 
+    owl:NamedIndividual . 
+skos:Concept rdf:type owl:Class . 
+<https://dome40.eu/semantics/example.ttl#OPEN_DATABASE_XTALS> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "true"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> "https://odbx.science/"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#MODELLING_DATA> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#INTERACTIVE_APP_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#CONSUMER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "/api/discover/results/OPEN_DATABASE_XTALS?search_string="^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#conforms_to> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#OPTIMADE_API_SPECIFICATION> ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "Open Database Xtals"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "OPEN_DATABASE_XTALS is a public database of crystal structures from the group of Dr Andrew Morris at the University of Birmingham, currently in public beta with a limited set of structures."^^xs:string . 
+dcterms:contributor rdf:type owl:AnnotationProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_offering_trial_period_days> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offering> ; 
+  rdfs:range xs:integer ; 
+  rdfs:comment "Property that points to the duration (in days) of the offering/bundle free trial period"^^xs:string ; 
+  rdf:type owl:FunctionalProperty , 
+    owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> rdfs:subPropertyOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url> , 
+    foaf:homepage ; 
+  rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:anyURI ; 
+  rdfs:comment "Points to the URL of the platform homepage"^^xs:string ; 
+  rdf:type owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#SMILES> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_STANDARD_IDENTIFIERS> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_identifier> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#provider> rdfs:label "Provider"^^xs:string ; 
+  rdfs:subClassOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform_type> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> skos:prefLabel "List of topics"^^xs:string ; 
+  rdfs:comment "A (toy, but Dome4.0-related and mapped to EuroSciVoc) set of domains to classify documents"^^xs:string ; 
+  rdf:type owl:NamedIndividual , 
+    skos:ConceptScheme . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#OPTIMADE_API_SPECIFICATION> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_STANDARD_API_SPECIFICATIONS> ; 
+  skos:prefLabel "OPTIMADE API specification"^^xs:string ; 
+  rdfs:seeAlso "https://github.com/Materials-Consortia/OPTIMADE/blob/develop/optimade.rst"^^xs:anyURI ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_api_specification> , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/example.ttl#MATERIALSPROJECT> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "true"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> "https://materialsproject.org/"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#MODELLING_DATA> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#INTERACTIVE_APP_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#CONSUMER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "/api/discover/results/MATERIALSPROJECT?search_string="^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#conforms_to> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#OPTIMADE_API_SPECIFICATION> ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "Materials Project"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "The Materials Project is an open-access database offering material properties to accelerate the development of technology by predicting how new materials–both real and hypothetical."^^xs:string . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#PUBLICATION> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 
+skos:ConceptScheme rdf:type owl:Class . 
+<https://emmc.eu/semantics/evmpo/evmpo.ttl#infrastructure> rdf:type owl:Class . 
+skos:inScheme rdf:type owl:AnnotationProperty . 
+<https://dome40.eu/semantics/example.ttl#PUBCHEM> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "true"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> "https://pubchem.ncbi.nlm.nih.gov"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#MATERIAL_PROPERTY> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "http://pubchem-connector:6000"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "Pubchem"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "A database of chemical molecules and their activities against biological assays"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_api_documentation> "https://pubchemdocs.ncbi.nlm.nih.gov/pug-rest"^^xs:anyURI . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_offering_monthly_cost> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offering> ; 
+  rdfs:range xs:decimal ; 
+  rdfs:comment "Property that points to the monthly cost (in Euros) of the offering/bundle"^^xs:string ; 
+  rdf:type owl:FunctionalProperty , 
+    owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#SEA_VESSELS> skos:exactMatch <http://data.europa.eu/8mn/euroscivoc/950b88c1-e09c-4b5d-92e0-d84433dd6025> ; 
+  skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> , 
+    skos:Concept , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#CSV> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Comma-separated Values (CSV)"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.1943d4"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> skos:prefLabel "List of product types (i.e., the types found on Dome4.0)"^^xs:string ; 
+  rdfs:comment "A (toy, but Dome4.0-related) set of product types that will guide the search"^^xs:string ; 
+  rdf:type owl:NamedIndividual , 
+    skos:ConceptScheme . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#XLSX> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Microsoft Excel format (XLSX)"^^xs:string ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> ; 
+  rdf:type owl:ObjectProperty . 
+<https://emmc.eu/semantics/evmpo/evmpo.ttl#annotation> rdf:type owl:Class . 
+dcterms:creator rdf:type owl:AnnotationProperty . 
+<https://dome40.eu/semantics/example.ttl#e183b2ff-2b6d-491e-b39f-3e9dc070fd2b> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "false"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> ""^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#EQUIPMENT> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_ON_DEMAND_PROVIDER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "https://78.47.72.242:8895/data"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#conforms_to> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#IDS_API_SPECIFICATION> ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "MARKET4.0 Proprietary dataset" ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "IDS manufacturing equipment data with fees" ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_api_documentation> ""^^xs:anyURI . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> skos:prefLabel "List of file formats that DOME4.0 is aware of, might be able to load and parse (not necessarily)."^^xs:string ; 
+  rdfs:comment "A (toy, but Dome4.0-related) set of file formats that users and providers could select from."^^xs:string , 
+    "We connect with FAIRSharing DOIs whenever those are available."^^xs:string ; 
+  rdf:type owl:NamedIndividual , 
+    skos:ConceptScheme . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#PNG> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Portable Network Graphics (PNG)"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.7xdxc2"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> ; 
+  rdfs:comment "Points to a product type that is offered on the platform"^^xs:string ; 
+  rdf:type owl:ObjectProperty . 
+<https://dome40.eu/semantics/example.ttl#THEORETICAL_CRYSTALLOGRAPHY_OPEN_DATABASE> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "true"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> "https://www.crystallography.net"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#MODELLING_DATA> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#INTERACTIVE_APP_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#CONSUMER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "http://crystallography-connector:6000"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#conforms_to> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#OPTIMADE_API_SPECIFICATION> ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "Theoretical Crystallography Open Database"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "Theoretical Crystallography Open Database is an Open-access collection of theoretically calculated or refined crystal structures of organic, inorganic, metal-organic compounds and minerals, excluding biopolymers."^^xs:string . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#RDF> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Resource Description Framework (RDF)"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.p77ph9"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#uses_standard_identifier> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range <https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_identifier> ; 
+  rdfs:comment "Points to a standard identifier that is recognized by the platform API"^^xs:string ; 
+  rdf:type owl:ObjectProperty . 
+skos:prefLabel rdf:type owl:AnnotationProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_ON_DEMAND_PROVIDER> rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#data_on_demand_provider> . 
+dcterms:title rdf:type owl:AnnotationProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#PDF> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Portable document format (PDF)"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.0ade3e"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#data_provider> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform_type> ; 
+  rdf:type owl:ObjectProperty . 
+<https://dome40.eu/semantics/example.ttl#NOWAD> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "true"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> "https://nomad-lab.eu/"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#MODELLING_DATA> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#INTERACTIVE_APP_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#CONSUMER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "/api/discover/results/NOWAD?search_string="^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#conforms_to> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#OPTIMADE_API_SPECIFICATION> ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "Novel Materials Discovery"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "Nowad is a novel materials discovery database which enables FAIR sharing and use of materials science data."^^xs:string . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> rdfs:subPropertyOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url> ; 
+  rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:anyURI ; 
+  rdfs:comment "Points to the URL of the platform query API"^^xs:string ; 
+  rdf:type owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#STEP> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Standard for the Exchange of Product (STEP) Data"^^xs:string ; 
+  rdfs:seeAlso "https://en.wikipedia.org/wiki/ISO_10303-21"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#GEOTIFF> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Geographic Tagged Image File Format (GeoTIFF)"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.cdd9bf"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_machine_query_information> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:string ; 
+  rdfs:comment "Gives information (text) on how machine query strings are formed"^^xs:string ; 
+  rdf:type owl:DatatypeProperty . 
+<https://dome40.eu/semantics/example.ttl#THE_OPEN_QUANTUM_MATERIALS> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "true"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> "http://oqmd.org"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#MODELLING_DATA> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#INTERACTIVE_APP_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#CONSUMER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "/api/discover/results/THE_OPEN_QUANTUM_MATERIALS?search_string="^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#conforms_to> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#OPTIMADE_API_SPECIFICATION> ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "The Open Quantum Materials"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "Open quantum materials database is a high-throughput database currently consisting of nearly 300,000 density functional theory (DFT) total energy calculations of compounds from the Inorganic Crystal Structure Database (ICSD) and decorations of commonly occurring crystal structures."^^xs:string . 
+<https://dome40.eu/semantics/example.ttl#CRYSTALLOGRAPHY> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#is_free_platform> "true"^^xs:boolean ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_home> "http://crystallography.net/"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_topic> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offers> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#MODELLING_DATA> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_type> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#INTERACTIVE_APP_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#DATA_PROVIDER> , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#CONSUMER> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_query_api> "http://crystallography-connector:6000"^^xs:anyURI ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#conforms_to> <https://dome40.eu/semantics/dome4.0_core_stub.ttl#OPTIMADE_API_SPECIFICATION> ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> "Crystallography"^^xs:string ; 
+  <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> "Crystallography is an open-access collection of crystal structures of organic, inorganic, metal-organic compounds and minerals, excluding biopolymers."^^xs:string . 
+foaf:homepage rdf:type owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#SOFTWARE> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> rdfs:label "Product type"^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#annotation> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_agent> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range <https://dome40.eu/semantics/dome4.0_core_stub.ttl#agent> ; 
+  rdf:type owl:ObjectProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#EQUIPMENT> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#PATENT> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#conforms_to> rdfs:subPropertyOf dcterms:conformsTo ; 
+  rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range <https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_api_specification> ; 
+  rdfs:comment "Points to a (widely-used) API specification the platform conforms to"^^xs:string ; 
+  rdf:type owl:ObjectProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#data_provider> rdfs:label "Data provider"^^xs:string ; 
+  rdfs:comment "Provider of data (that exists already, is stored and can be otbained immediately upon request)"^^xs:string ; 
+  rdfs:subClassOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#provider> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> rdfs:label "Platform"^^xs:string ; 
+  rdfs:comment """From Merriam-Webster: (in computing) \"an application or website that
+  \t       serves as a base from which a service is provided\" [“Platform.” Merriam-Webster.com
+  \t       Dictionary, Merriam-Webster, https://www.merriam-webster.com/dictionary/platform.
+\t       Accessed 13 Sep. 2022.]"""^^xs:string , 
+    "A web-based platform"^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#infrastructure> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#api_specification> rdfs:label "API specification"^^xs:string ; 
+  rdfs:comment "Specification of an API"^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#information_content_entity> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#AIIDA_FORMAT> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "AiiDA export file"^^xs:string ; 
+  rdfs:seeAlso "https://aiida.readthedocs.io/projects/aiida-core/en/v2.0.0b1/internals/storage/sqlite_zip.html"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_identifier> rdfs:label "Standard identifier"^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#annotation> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#> dcterms:contributor "Adham Hashibon"^^xs:string , 
+    "Mike Wang"^^xs:string , 
+    "Vasily Bunakov"^^xs:string , 
+    "Bjorn Tore Lovfall"^^xs:string , 
+    "Martin Thomas Horsch"^^xs:string , 
+    "Emanuele Ghedini"^^xs:string , 
+    "Kristine Wiik"^^xs:string , 
+    "Treesa Joseph"^^xs:string , 
+    "Noel Vizcaino"^^xs:string , 
+    "Martin Uhrin"^^xs:string ; 
+  dcterms:creator "Silvia Chiacchiera"^^xs:string ; 
+  dcterms:title "Collecting and organizing core terms of the ecosystem ontology"^^xs:string ; 
+  rdf:type owl:Ontology ; 
+  dcterms:modified "2022-09-14"^^xs:string . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#RAW_MATERIAL> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#data_on_demand_provider> rdfs:label "Data-on-demand provider"^^xs:string ; 
+  rdfs:comment "Provider of data on demand (i.e, upon sending a request, one gets a receipt, then the data - possibly after some time)"^^xs:string ; 
+  rdfs:subClassOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#provider> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#product> rdfs:label "Product"^^xs:string ; 
+  rdfs:comment "A product in the EMVPO sense - someting that can be traded on the marketplace ecosystem"^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#product> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#includes_platform> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offering> ; 
+  rdfs:range <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdf:type owl:ObjectProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#consumer> rdfs:label "Consumer"^^xs:string ; 
+  rdfs:comment "A platform that consumes data (a data sink)"^^xs:string ; 
+  rdfs:subClassOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform_type> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#uses_file_format> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> ; 
+  rdfs:comment "Points to a file format that is offered or can be consumed (I/O) on the platform"^^xs:string ; 
+  rdf:type owl:ObjectProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> rdfs:label "File format"^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#annotation> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#offering> rdfs:label "Offering/bundle of data and/or data services on DOME 4.0"^^xs:string , 
+    "Can involve one or multiple platforms"^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#information_content_entity> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_name> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:string ; 
+  rdf:type owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#CAS_NUMBER> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_STANDARD_IDENTIFIERS> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_identifier> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#TTL> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Terse RDF Triple Language (Turtle or TTL)"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.3e194c"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_offering_description> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offering> ; 
+  rdfs:range xs:string ; 
+  rdfs:comment "Property that points to the description of the offering/bundle"^^xs:string ; 
+  rdf:type owl:FunctionalProperty , 
+    owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#IDS_API_SPECIFICATION> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_STANDARD_API_SPECIFICATIONS> ; 
+  skos:prefLabel "IDS (Industrial Data Space) API specification"^^xs:string ; 
+  rdfs:seeAlso "https://app.swaggerhub.com/apis/JulianSchuette/trusted-connector_api/2.1.0-SNAPSHOT"^^xs:anyURI ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#standard_api_specification> , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_STANDARD_IDENTIFIERS> skos:prefLabel "List of widely used standard identifiers for the materials and manufacturing domain."^^xs:string ; 
+  rdfs:comment "A (toy, but Dome4.0-related) set of identifiers that providers could select from. "^^xs:string ; 
+  rdf:type owl:NamedIndividual , 
+    skos:ConceptScheme . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#JPEG> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Joint Photographic Experts Group Format (JPEG)"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.nggj0j"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+dcterms:conformsTo rdf:type owl:ObjectProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#METEOROLOGY> skos:exactMatch <http://data.europa.eu/8mn/euroscivoc/f2a75729-1f21-4b2d-8c7d-bc7af02e71f7> ; 
+  skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> , 
+    skos:Concept , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#NATURAL_SCIENCES> skos:exactMatch <http://data.europa.eu/8mn/euroscivoc/6e2fed37-b3c4-4272-8c98-8a062479022d> ; 
+  skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> , 
+    skos:Concept , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#MEDICAL_AND_HEALTH_SCIENCES> skos:exactMatch <http://data.europa.eu/8mn/euroscivoc/85513f14-3c39-4930-94c6-e5255a500b44> ; 
+  skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> , 
+    skos:Concept , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#ENGINEERING_AND_TECHNOLOGY> skos:exactMatch <http://data.europa.eu/8mn/euroscivoc/98dfce4a-c6aa-40f2-a126-6f76bbe6655d> ; 
+  skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> , 
+    skos:Concept , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#CARTOGRAPHY> skos:exactMatch <http://data.europa.eu/8mn/euroscivoc/a1a79293-1df8-43c9-af05-ed63bdfda720> ; 
+  skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_TOPICS> ; 
+  rdf:type <https://dome40.eu/semantics/dome4.0_core_stub.ttl#topic> , 
+    skos:Concept , 
+    owl:NamedIndividual . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#agent> rdfs:label "Agent"^^xs:string ; 
+  rdfs:comment "An agent in the EMVPO sense - somebody that can act on a the marketplace ecosystem."^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#agent> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_description> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:string ; 
+  rdf:type owl:DatatypeProperty . 
+<https://emmc.eu/semantics/evmpo/evmpo.ttl#product> rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#interactive_app_provider> rdfs:label "Interactive-application provider"^^xs:string ; 
+  rdfs:comment "Provider of interactive application (i.e., one logs in and can perform actions)"^^xs:string ; 
+  rdfs:subClassOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#provider> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_offering_name> rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#offering> ; 
+  rdfs:range xs:string ; 
+  rdfs:comment "Property that points to the name of the offering/bundle"^^xs:string ; 
+  rdf:type owl:FunctionalProperty , 
+    owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#MODELLING_DATA> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url_api_documentation> rdfs:subPropertyOf <https://dome40.eu/semantics/dome4.0_core_stub.ttl#has_platform_url> ; 
+  rdfs:domain <https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform> ; 
+  rdfs:range xs:anyURI ; 
+  rdfs:comment "Points to the URL of the documentation for the platform API"^^xs:string ; 
+  rdf:type owl:DatatypeProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#RDF_XML> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "RDF/XML"^^xs:string ; 
+  rdfs:seeAlso "https://www.w3.org/TR/rdf-syntax-grammar/"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#platform_type> rdfs:label "Platform type"^^xs:string ; 
+  rdfs:subClassOf <https://emmc.eu/semantics/evmpo/evmpo.ttl#annotation> ; 
+  rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#JSON> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "JavaScript Object Notation (JSON)"^^xs:string ; 
+  rdfs:seeAlso "10.25504/FAIRsharing.5bbab9"^^xs:anyURI , 
+    "http://dx.doi.org/10.17487/RFC8259"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://emmc.eu/semantics/evmpo/evmpo.ttl#information_content_entity> rdf:type owl:Class . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#CIF> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Crystallographic Information Framework (CIF) - Model and format"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.zr52g5"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://emmc.eu/semantics/evmpo/evmpo.ttl#agent> rdf:type owl:Class . 
+dcterms:modified rdf:type owl:AnnotationProperty . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#MATERIAL_PROPERTY> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#XYZ> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "XYZ atomistic data"^^xs:string ; 
+  rdfs:seeAlso "https://en.wikipedia.org/wiki/XYZ_file_format"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#CONSUMER> rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#consumer> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#OWL> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_FILE_FORMATS> ; 
+  skos:prefLabel "Web Ontology Language (OWL) - Model and format"^^xs:string ; 
+  rdfs:seeAlso "https://doi.org/10.25504/FAIRsharing.atygwy"^^xs:anyURI ; 
+  rdf:type owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#file_format> . 
+<https://dome40.eu/semantics/dome4.0_core_stub.ttl#EXPERIMENTAL_DATA> skos:inScheme <https://dome40.eu/semantics/dome4.0_core_stub.ttl#LIST_OF_PRODUCT_TYPES> ; 
+  rdf:type skos:Concept , 
+    owl:NamedIndividual , 
+    <https://dome40.eu/semantics/dome4.0_core_stub.ttl#product_type> . 

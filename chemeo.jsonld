@@ -1,0 +1,35 @@
+{"@id" : "https://dome40.eu/semantics/scenario/platforms#CHEMEO",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://dome40.eu/semantics/dome4.0_core#platform" ],
+  "https://dome40.eu/semantics/dome4.0_core#has_platform_description" : [ {
+    "@value" : "Chemeo is an open, high quality chemical properties database."
+  } ],
+  "https://dome40.eu/semantics/dome4.0_core#has_platform_name" : [ {
+    "@value" : "Chemeo"
+  } ],
+  "https://dome40.eu/semantics/dome4.0_core#has_platform_topic" : [ {
+    "@id" : "https://dome40.eu/semantics/dome4.0_core#NATURAL_SCIENCES"
+  } ],
+  "https://dome40.eu/semantics/dome4.0_core#has_platform_type" : [ {
+    "@id" : "https://dome40.eu/semantics/dome4.0_core#DATA_PROVIDER"
+  } ],
+  "https://dome40.eu/semantics/dome4.0_core#has_platform_url_api_documentation" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#anyURI",
+    "@value" : "https://www.chemeo.com/api/v1/swagger.json"
+  } ],
+  "https://dome40.eu/semantics/dome4.0_core#has_platform_url_home" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#anyURI",
+    "@value" : "https://www.chemeo.com/"
+  } ],
+  "https://dome40.eu/semantics/dome4.0_core#has_platform_url_query_api" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#anyURI",
+    "@value" : "/api/discover/results/CHEMEO?search_string="
+  } ],
+  "https://dome40.eu/semantics/dome4.0_core#has_some_free_product" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+    "@value" : "true"
+  } ],
+  "https://dome40.eu/semantics/dome4.0_core#offers" : [ {
+    "@id" : "https://dome40.eu/semantics/dome4.0_core#MATERIAL_PROPERTY"
+  } ]
+}
+

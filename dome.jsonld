@@ -1,0 +1,488 @@
+{
+  "@context": {
+    "domeES": "http://dome40.eu/semantics/dome4.0_core#",
+    "mio": "http://www.ddmd.io/mio/"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.com/dataset/1",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment1",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/1"
+      },
+      "domeES:label": "Label1",
+      "domeES:platform_type": "PlatformType1",
+      "domeES:type": "Type1",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/10",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment10",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/10"
+      },
+      "domeES:label": "Label10",
+      "domeES:platform_type": "PlatformType10",
+      "domeES:type": "Type10",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/2",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment2",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/2"
+      },
+      "domeES:label": "Label2",
+      "domeES:platform_type": "PlatformType2",
+      "domeES:type": "Type2",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/3",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment3",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/3"
+      },
+      "domeES:label": "Label3",
+      "domeES:platform_type": "PlatformType3",
+      "domeES:type": "Type3",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/4",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment4",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/4"
+      },
+      "domeES:label": "Label4",
+      "domeES:platform_type": "PlatformType4",
+      "domeES:type": "Type4",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/5",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment5",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/5"
+      },
+      "domeES:label": "Label5",
+      "domeES:platform_type": "PlatformType5",
+      "domeES:type": "Type5",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/6",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment6",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/6"
+      },
+      "domeES:label": "Label6",
+      "domeES:platform_type": "PlatformType6",
+      "domeES:type": "Type6",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/7",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment7",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/7"
+      },
+      "domeES:label": "Label7",
+      "domeES:platform_type": "PlatformType7",
+      "domeES:type": "Type7",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/8",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment8",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/8"
+      },
+      "domeES:label": "Label8",
+      "domeES:platform_type": "PlatformType8",
+      "domeES:type": "Type8",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/dataset/9",
+      "@type": "domeES:data_set",
+      "domeES:comment": "Comment9",
+      "domeES:hasPart": {
+        "@id": "http://example.com/data/9"
+      },
+      "domeES:label": "Label9",
+      "domeES:platform_type": "PlatformType9",
+      "domeES:type": "Type9",
+      "mio:hasPart": [
+        {
+          "@id": "domeES:data_creator"
+        },
+        {
+          "@id": "domeES:data_publisher"
+        },
+        {
+          "@id": "domeES:description"
+        },
+        {
+          "@id": "domeES:issued_date"
+        },
+        {
+          "@id": "domeES:license"
+        },
+        {
+          "@id": "domeES:semantic_keyword"
+        },
+        {
+          "@id": "domeES:syntactic_keyword"
+        },
+        {
+          "@id": "domeES:title"
+        },
+        {
+          "@id": "domeES:web_platform"
+        }
+      ]
+    },
+    {
+      "@id": "http://example.com/data/1",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "8.077447e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/10",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "4.351884e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/2",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "6.619834e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/3",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "2.019491e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/4",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "3.175639e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/5",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "6.029746e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/6",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "4.316173e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/7",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "9.117797e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/8",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "4.83214e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    },
+    {
+      "@id": "http://example.com/data/9",
+      "@type": "domeES:data",
+      "domeES:hasValue": {
+        "@value": "1.901588e+00",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      }
+    }
+  ]
+}
