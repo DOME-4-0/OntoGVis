@@ -4,12 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSON-LD Network Visualization</title>
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
-        #controls { margin-bottom: 20px; }
-        #network { width: 100%; height: 600px; border: 1px solid #ccc; background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        #fileInput, #layoutSelect { padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; margin-right: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        #network {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #fileInput, #layoutSelect {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -21,209 +44,178 @@
         <option value="network">Network Layout</option>
         <option value="hierarchical">Hierarchical Layout</option>
     </select>
+    <div id="status" class="error"></div>
 </div>
 <div id="network"></div>
 
 <script>
-    const fileInput = document.getElementById('fileInput');
-    const layoutSelect = document.getElementById('layoutSelect');
-    const networkContainer = document.getElementById('network');
+    document.addEventListener('DOMContentLoaded', () => {
+        const fileInput = document.getElementById('fileInput');
+        const layoutSelect = document.getElementById('layoutSelect');
+        const networkContainer = document.getElementById('network');
+        const status = document.getElementById('status');
+        let network = null;
+        let jsonldData = null;
 
-    fileInput.addEventListener('change', function(event) {
-        handleFileSelect(event);
-    });
+        fileInput.addEventListener('change', handleFileSelect);
+        layoutSelect.addEventListener('change', updateVisualization);
 
-    layoutSelect.addEventListener('change', function() {
-        handleLayoutChange();
-    });
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        jsonldData = JSON.parse(e.target.result);
+                        status.textContent = '';
+                        updateVisualization();
+                    } catch (error) {
+                        status.textContent = 'Invalid JSON-LD file.';
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
 
-    function handleFileSelect(event) {
-        const file = event.target.files[0];
-        if (file) {
-            console.log("Selected file:", file); // Debug log
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                console.log("File loaded"); // Debug log
-                const jsonld = JSON.parse(e.target.result);
-                if (jsonld) {
-                    console.log("Parsed JSON-LD:", jsonld); // Debug log
-                    visualize(jsonld);
-                } else {
-                    console.log("Failed to parse JSON-LD"); // Debug log
+        function updateVisualization() {
+            if (!jsonldData) return;
+
+            const nodes = [];
+            const edges = [];
+            const nodeIds = new Set();
+            let nodeIdCounter = 1;
+
+            const generateId = () => 'node' + nodeIdCounter++;
+
+            const addNode = (id, label, options = {}) => {
+                if (!id) id = generateId();
+                if (!nodeIds.has(id)) {
+                    nodes.push({
+                        id,
+                        label,
+                        color: options.color || '#ADD8E6',
+                        shape: options.shape || 'box',
+                        font: options.font || { size: 16, color: '#333' },
+                        borderWidth: options.borderWidth || 1,
+                        title: label // Tooltip
+                    });
+                    nodeIds.add(id);
                 }
             };
-            reader.readAsText(file);
-        } else {
-            console.log("No file selected"); // Debug log
-        }
-    }
 
-    function handleLayoutChange() {
-        console.log("Layout changed to:", layoutSelect.value); // Debug log
-        if (fileInput.files[0]) {
-            handleFileSelect({ target: fileInput });
-        } else {
-            console.log("No file to reload after layout change"); // Debug log
-        }
-    }
+            const addEdge = (from, to, label, options = {}) => {
+                if (from && to) {
+                    edges.push({
+                        from,
+                        to,
+                        label,
+                        color: options.color || '#888',
+                        font: options.font || { size: 14, color: '#333', strokeWidth: 2 },
+                        arrows: options.arrows || { to: { enabled: true, scaleFactor: 1.2 } },
+                        dashes: options.dashes || false
+                    });
+                }
+            };
 
-    function visualize(jsonld) {
-        const nodes = [];
-        const edges = [];
-        const nodeIds = new Set();
-        let nodeIdCounter = 1;
-
-        function generateId() {
-            return 'node' + nodeIdCounter++;
-        }
-
-        function addNode(id, label, options) {
-            if (!id) {
-                id = generateId();
-            }
-            if (!nodeIds.has(id)) {
-                nodes.push({
-                    id: id,
-                    label: label,
-                    color: (options && options.color) ? options.color : '#ADD8E6',
-                    shape: (options && options.shape) ? options.shape : 'box',
-                    font: (options && options.font) ? options.font : { size: 16, color: '#333' },
-                    borderWidth: (options && options.borderWidth) ? options.borderWidth : 1
-                });
-                nodeIds.add(id);
-                console.log("Node added:", id); // Debug log
-            } else {
-                console.log("Node already exists:", id); // Debug log
-            }
-        }
-
-        function addEdge(from, to, label, options) {
-            if (from && to) {
-                edges.push({
-                    from: from,
-                    to: to,
-                    label: label,
-                    color: (options && options.color) ? options.color : '#888',
-                    font: (options && options.font) ? options.font : { size: 14, color: '#333', strokeWidth: 2 },
-                    arrows: (options && options.arrows) ? options.arrows : { to: { enabled: true, scaleFactor: 1.2 } },
-                    dashes: (options && options.dashes) ? options.dashes : false
-                });
-                console.log("Edge added from", from, "to", to); // Debug log
-            } else {
-                console.log("Invalid edge parameters:", from, to); // Debug log
-            }
-        }
-
-        function parseObject(obj, parentId) {
-            console.log("Parsing object:", obj); // Debug log
-            for (let key in obj) {
-                console.log("Parsing key:", key); // Debug log
-                if (Array.isArray(obj[key])) {
-                    obj[key].forEach(function(item) {
-                        if (item['@id']) {
-                            addNode(item['@id'], item['@id'], { color: '#87CEEB', shape: 'ellipse' });
-                            addEdge(parentId, item['@id'], key);
-                        } else if (item['@value']) {
+            const parseObject = (obj, parentId) => {
+                for (const key in obj) {
+                    const value = obj[key];
+                    if (Array.isArray(value)) {
+                        value.forEach(item => {
+                            if (item['@id']) {
+                                addNode(item['@id'], item['@id'], { color: '#87CEEB', shape: 'ellipse' });
+                                addEdge(parentId, item['@id'], key);
+                            } else if (item['@value']) {
+                                const valueId = generateId();
+                                addNode(valueId, item['@value'], { color: '#FFD700', shape: 'diamond' });
+                                addEdge(parentId, valueId, key);
+                            }
+                        });
+                    } else if (typeof value === 'object' && value !== null) {
+                        if (value['@id']) {
+                            addNode(value['@id'], value['@id'], { color: key === '@type' ? '#FFB6C1' : '#87CEEB' });
+                            addEdge(parentId, value['@id'], key);
+                        } else if (value['@value']) {
                             const valueId = generateId();
-                            addNode(valueId, item['@value'], { color: '#FFD700', shape: 'diamond' });
+                            addNode(valueId, value['@value'], { color: '#FFD700', shape: 'diamond' });
                             addEdge(parentId, valueId, key);
                         }
-                    });
-                } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-                    if (obj[key]['@id']) {
-                        addNode(obj[key]['@id'], obj[key]['@id'], { color: (key === '@type') ? '#FFB6C1' : '#87CEEB' });
-                        addEdge(parentId, obj[key]['@id'], key);
-                    } else if (obj[key]['@value']) {
+                    } else {
                         const valueId = generateId();
-                        addNode(valueId, obj[key]['@value'], { color: '#FFD700', shape: 'diamond' });
-                        addEdge(parentId, valueId, key);
+                        addNode(valueId, value, {
+                            color: key === '@type' ? '#FFB6C1' : key === '@id' ? '#8FBC8F' : '#ADD8E6',
+                            shape: key === '@type' ? 'diamond' : 'box',
+                            borderWidth: key === '@type' ? 3 : 1
+                        });
+                        addEdge(parentId, valueId, key, {
+                            color: key === '@type' ? '#FFB6C1' : '#888',
+                            dashes: key === '@type'
+                        });
                     }
+                }
+            };
+
+            const addGraphNodesAndEdges = (jsonld) => {
+                if (jsonld['@graph']) {
+                    jsonld['@graph'].forEach(item => {
+                        addNode(item['@id'], item['@id']);
+                        parseObject(item, item['@id']);
+                    });
                 } else {
-                    const valueId = generateId();
-                    addNode(valueId, obj[key], {
-                        color: (key === '@type') ? '#FFB6C1' : (key === '@id') ? '#8FBC8F' : '#ADD8E6',
-                        shape: (key === '@type') ? 'diamond' : 'box',
-                        borderWidth: (key === '@type') ? 3 : 1
-                    });
-                    addEdge(parentId, valueId, key, {
-                        color: (key === '@type') ? '#FFB6C1' : '#888',
-                        dashes: (key === '@type')
-                    });
+                    addNode(jsonld['@id'], jsonld['@id']);
+                    parseObject(jsonld, jsonld['@id']);
                 }
-            }
-        }
+            };
 
-        function addGraphNodesAndEdges(jsonld) {
-            if (jsonld['@graph']) {
-                console.log("Graph found in JSON-LD"); // Debug log
-                jsonld['@graph'].forEach(function(item) {
-                    addNode(item['@id'], item['@id']);
-                    parseObject(item, item['@id']);
-                });
+            addGraphNodesAndEdges(jsonldData);
+
+            const data = {
+                nodes: new vis.DataSet(nodes),
+                edges: new vis.DataSet(edges)
+            };
+            const layout = layoutSelect.value;
+            const options = {
+                layout: {
+                    hierarchical: layout === 'hierarchical' ? {
+                        direction: 'UD',
+                        sortMethod: 'hubsize'
+                    } : false
+                },
+                edges: {
+                    smooth: {
+                        type: layout === 'hierarchical' ? 'straight' : 'cubicBezier',
+                        forceDirection: layout === 'hierarchical' ? 'vertical' : 'horizontal',
+                        roundness: 0.4
+                    },
+                    arrows: { to: { enabled: true, scaleFactor: 1.2 } },
+                    font: { size: 14, color: '#333', strokeWidth: 2 }
+                },
+                nodes: {
+                    shape: 'box',
+                    font: { size: 16, color: '#333' },
+                    margin: 10,
+                    widthConstraint: { maximum: 200 }
+                },
+                physics: {
+                    stabilization: { enabled: true, iterations: 1000 },
+                    solver: layout === 'hierarchical' ? 'barnesHut' : 'repulsion',
+                    repulsion: { nodeDistance: 200, springLength: 200, springConstant: 0.05 }
+                },
+                interaction: {
+                    hover: true,
+                    navigationButtons: true,
+                    keyboard: true
+                }
+            };
+
+            if (network) {
+                network.setData(data);
+                network.setOptions(options);
             } else {
-                console.log("Single node JSON-LD"); // Debug log
-                addNode(jsonld['@id'], jsonld['@id']);
-                parseObject(jsonld, jsonld['@id']);
+                network = new vis.Network(networkContainer, data, options);
             }
         }
-
-        addGraphNodesAndEdges(jsonld);
-
-        const data = {
-            nodes: new vis.DataSet(nodes),
-            edges: new vis.DataSet(edges)
-        };
-        const layout = layoutSelect.value;
-        console.log("Setting up network with layout:", layout); // Debug log
-        const options = {
-            layout: {
-                hierarchical: layout === 'hierarchical' ? {
-                    direction: 'UD',
-                    sortMethod: 'hubsize'
-                } : false
-            },
-            edges: {
-                smooth: {
-                    type: layout === 'hierarchical' ? 'straight' : 'cubicBezier',
-                    forceDirection: layout === 'hierarchical' ? 'vertical' : 'horizontal',
-                    roundness: 0.4
-                },
-                arrows: {
-                    to: { enabled: true, scaleFactor: 1.2 }
-                },
-                font: {
-                    size: 14,
-                    color: '#333',
-                    strokeWidth: 2
-                }
-            },
-            nodes: {
-                shape: 'box',
-                font: {
-                    size: 16,
-                    color: '#333'
-                },
-                margin: 10,
-                widthConstraint: {
-                    maximum: 200
-                }
-            },
-            physics: {
-                stabilization: {
-                    enabled: true,
-                    iterations: 1000
-                },
-                solver: layout === 'hierarchical' ? 'barnesHut' : 'repulsion',
-                repulsion: {
-                    nodeDistance: 200,
-                    springLength: 200,
-                    springConstant: 0.05
-                }
-            }
-        };
-        console.log("Creating network"); // Debug log
-        new vis.Network(networkContainer, data, options);
-    }
+    });
 </script>
 
 </body>
