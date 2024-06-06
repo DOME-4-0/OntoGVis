@@ -23,12 +23,15 @@
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        #fileInput, #layoutSelect {
+        #fileInput, #layoutSelect, #searchInput {
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
             margin-right: 10px;
+        }
+        #searchInput {
+            width: 200px;
         }
         .error {
             color: red;
@@ -44,6 +47,7 @@
         <option value="network">Network Layout</option>
         <option value="hierarchical">Hierarchical Layout</option>
     </select>
+    <input type="text" id="searchInput" placeholder="Search nodes..." />
     <div id="status" class="error"></div>
 </div>
 <div id="network"></div>
@@ -54,11 +58,13 @@
         const layoutSelect = document.getElementById('layoutSelect');
         const networkContainer = document.getElementById('network');
         const status = document.getElementById('status');
+        const searchInput = document.getElementById('searchInput');
         let network = null;
         let jsonldData = null;
 
         fileInput.addEventListener('change', handleFileSelect);
         layoutSelect.addEventListener('change', updateVisualization);
+        searchInput.addEventListener('input', searchNodes);
 
         function handleFileSelect(event) {
             const file = event.target.files[0];
@@ -97,7 +103,8 @@
                         shape: options.shape || 'box',
                         font: options.font || { size: 16, color: '#333' },
                         borderWidth: options.borderWidth || 1,
-                        title: label // Tooltip
+                        title: label,
+                        url: options.url || null
                     });
                     nodeIds.add(id);
                 }
@@ -123,7 +130,7 @@
                     if (Array.isArray(value)) {
                         value.forEach(item => {
                             if (item['@id']) {
-                                addNode(item['@id'], item['@id'], { color: '#87CEEB', shape: 'ellipse' });
+                                addNode(item['@id'], item['@id'], { color: '#87CEEB', shape: 'ellipse', url: item['@id'] });
                                 addEdge(parentId, item['@id'], key);
                             } else if (item['@value']) {
                                 const valueId = generateId();
@@ -133,7 +140,7 @@
                         });
                     } else if (typeof value === 'object' && value !== null) {
                         if (value['@id']) {
-                            addNode(value['@id'], value['@id'], { color: key === '@type' ? '#FFB6C1' : '#87CEEB' });
+                            addNode(value['@id'], value['@id'], { color: key === '@type' ? '#FFB6C1' : '#87CEEB', url: value['@id'] });
                             addEdge(parentId, value['@id'], key);
                         } else if (value['@value']) {
                             const valueId = generateId();
@@ -145,7 +152,8 @@
                         addNode(valueId, value, {
                             color: key === '@type' ? '#FFB6C1' : key === '@id' ? '#8FBC8F' : '#ADD8E6',
                             shape: key === '@type' ? 'diamond' : 'box',
-                            borderWidth: key === '@type' ? 3 : 1
+                            borderWidth: key === '@type' ? 3 : 1,
+                            url: key === '@id' ? value : null
                         });
                         addEdge(parentId, valueId, key, {
                             color: key === '@type' ? '#FFB6C1' : '#888',
@@ -158,11 +166,11 @@
             const addGraphNodesAndEdges = (jsonld) => {
                 if (jsonld['@graph']) {
                     jsonld['@graph'].forEach(item => {
-                        addNode(item['@id'], item['@id']);
+                        addNode(item['@id'], item['@id'], { url: item['@id'] });
                         parseObject(item, item['@id']);
                     });
                 } else {
-                    addNode(jsonld['@id'], jsonld['@id']);
+                    addNode(jsonld['@id'], jsonld['@id'], { url: jsonld['@id'] });
                     parseObject(jsonld, jsonld['@id']);
                 }
             };
@@ -213,6 +221,29 @@
                 network.setOptions(options);
             } else {
                 network = new vis.Network(networkContainer, data, options);
+                network.on("doubleClick", function (params) {
+                    const nodeId = network.getNodeAt(params.pointer.DOM);
+                    if (nodeId) {
+                        const node = data.nodes.get(nodeId);
+                        if (node.url) {
+                            window.open(node.url, '_blank');
+                        }
+                    }
+                });
+            }
+        }
+
+        function searchNodes() {
+            const searchTerm = searchInput.value.toLowerCase();
+            network.unselectAll();
+            if (searchTerm) {
+                const matchingNodes = network.body.data.nodes.get({
+                    filter: (node) => node.label && node.label.toLowerCase().includes(searchTerm)
+                });
+                network.selectNodes(matchingNodes.map((node) => node.id), true);
+                if (matchingNodes.length > 0) {
+                    network.focus(matchingNodes[0].id, { scale: 1.0, animation: true });
+                }
             }
         }
     });
