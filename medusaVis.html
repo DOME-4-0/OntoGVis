@@ -1,0 +1,413 @@
+{% extends "base.html" %}
+
+{% block main %}
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+<style>
+    body, html {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f9fa;
+        color: #2d3748;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    #main-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        padding: 20px;
+    }
+
+    #controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    #network {
+        flex: 1;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        min-height: 600px;
+    }
+
+    #layoutSelect, #searchInput, #searchType {
+        padding: 10px 16px;
+        font-size: 14px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        margin-right: 12px;
+        background-color: #fff;
+        color: #2d3748;
+        transition: all 0.2s;
+    }
+
+    #layoutSelect:hover, #searchInput:hover, #searchType:hover {
+        border-color: #cbd5e0;
+    }
+
+    #layoutSelect:focus, #searchInput:focus, #searchType:focus {
+        outline: none;
+        border-color: #4299e1;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    }
+
+    #searchInput {
+        width: 250px;
+    }
+
+    .vis-tooltip {
+        position: absolute;
+        padding: 8px 12px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        border-radius: 4px;
+        pointer-events: none;
+        max-width: 300px;
+        word-wrap: break-word;
+    }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div id="main-container">
+    <div id="controls">
+        <select id="layoutSelect">
+            <option value="network">Network Layout</option>
+            <option value="hierarchical">Hierarchical Layout</option>
+        </select>
+        <select id="searchType">
+            <option value="label">Search by Label</option>
+            <option value="id">Search by ID</option>
+            <option value="type">Search by Type</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Search nodes..." />
+    </div>
+    <div id="network"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const layoutSelect = document.getElementById('layoutSelect');
+    const networkContainer = document.getElementById('network');
+    const searchInput = document.getElementById('searchInput');
+    const searchType = document.getElementById('searchType');
+    let network = null;
+    let jsonldData = {{ jsonld|safe }};
+
+    const colorPalette = {
+        entity: '#86efac',      // Green
+        class: '#c4b5fd',       // Purple
+        property: '#f9a8d4',    // Pink
+        value: '#fcd34d',       // Yellow
+        type: '#fb923c',        // Orange
+        literal: '#93c5fd',     // Blue
+        blank: '#e2e8f0',       // Gray
+        resource: '#bfdbfe',    // Light Blue
+        default: '#f1f5f9'      // Light Gray
+    };
+
+    function truncateLabel(label, maxLength = 30) {
+        if (!label) return '';
+        const parts = String(label).split('/');
+        return parts.length > 1 
+            ? parts[parts.length - 1].substring(0, maxLength) + (parts[parts.length - 1].length > maxLength ? '...' : '')
+            : label.substring(0, maxLength) + (label.length > maxLength ? '...' : '');
+    }
+
+    function getNodeColor(type, key) {
+        if (key === '@type') return colorPalette.type;
+        switch(type?.toLowerCase()) {
+            case 'class': return colorPalette.class;
+            case 'property': return colorPalette.property;
+            case 'entity': return colorPalette.entity;
+            case 'value': return colorPalette.value;
+            case 'literal': return colorPalette.literal;
+            case 'blank': return colorPalette.blank;
+            case 'resource': return colorPalette.resource;
+            default: return colorPalette.default;
+        }
+    }
+
+    function updateVisualization() {
+        if (!jsonldData) return;
+
+        const nodes = [];
+        const edges = [];
+        const nodeIds = new Set();
+        let nodeIdCounter = 1;
+
+        const generateId = () => 'node' + nodeIdCounter++;
+
+        const addNode = (id, label, options = {}) => {
+            if (!id) id = generateId();
+            if (!nodeIds.has(id)) {
+                const truncatedLabel = truncateLabel(String(label));
+                nodes.push({
+                    id,
+                    label: truncatedLabel,
+                    title: String(label),
+                    color: {
+                        background: getNodeColor(options.type, options.key),
+                        border: options.borderColor || '#64748b',
+                        highlight: {
+                            background: '#93c5fd',
+                            border: '#2563eb'
+                        }
+                    },
+                    shape: options.shape || 'box',
+                    font: { 
+                        size: 14, 
+                        color: '#2d3748',
+                        face: 'Inter',
+                        bold: options.bold || false
+                    },
+                    borderWidth: options.borderWidth || 2,
+                    url: options.url || null,
+                    fullUrl: options.url || null,
+                    type: options.type || null,
+                    margin: 12,
+                    widthConstraint: {
+                        maximum: 200
+                    }
+                });
+                nodeIds.add(id);
+            }
+        };
+
+        const addEdge = (from, to, label, options = {}) => {
+            if (from && to) {
+                const shortLabel = truncateLabel(String(label));
+                edges.push({
+                    from,
+                    to,
+                    label: shortLabel,
+                    color: { 
+                        color: options.color || '#64748b', 
+                        highlight: '#3b82f6',
+                        hover: '#60a5fa'
+                    },
+                    font: { 
+                        size: 12, 
+                        color: '#4b5563',
+                        face: 'Inter',
+                        strokeWidth: 0,
+                        align: 'horizontal'
+                    },
+                    arrows: { 
+                        to: { 
+                            enabled: true, 
+                            scaleFactor: 0.8,
+                            type: 'arrow'
+                        } 
+                    },
+                    smooth: { 
+                        type: 'cubicBezier',
+                        forceDirection: 'horizontal',
+                        roundness: 0.3
+                    },
+                    length: 250,
+                    title: label
+                });
+            }
+        };
+
+        const parseObject = (obj, parentId) => {
+            for (const key in obj) {
+                const value = obj[key];
+                if (Array.isArray(value)) {
+                    value.forEach(item => {
+                        if (item['@id']) {
+                            addNode(item['@id'], item['@id'], { 
+                                color: colorPalette.resource,
+                                shape: 'ellipse',
+                                url: item['@id'],
+                                type: 'resource',
+                                key: key
+                            });
+                            addEdge(parentId, item['@id'], key);
+                        } else if (item['@value']) {
+                            const valueId = generateId();
+                            addNode(valueId, item['@value'], { 
+                                color: colorPalette.value,
+                                shape: 'diamond',
+                                type: 'literal'
+                            });
+                            addEdge(parentId, valueId, key);
+                        }
+                    });
+                } else if (typeof value === 'object' && value !== null) {
+                    if (value['@id']) {
+                        addNode(value['@id'], value['@id'], { 
+                            color: key === '@type' ? colorPalette.type : colorPalette.resource,
+                            url: value['@id'],
+                            type: key === '@type' ? 'type' : 'resource',
+                            key: key
+                        });
+                        addEdge(parentId, value['@id'], key);
+                    } else if (value['@value']) {
+                        const valueId = generateId();
+                        addNode(valueId, value['@value'], { 
+                            color: colorPalette.value,
+                            shape: 'diamond',
+                            type: 'literal'
+                        });
+                        addEdge(parentId, valueId, key);
+                    }
+                }
+            }
+        };
+
+        const addGraphNodesAndEdges = (jsonld) => {
+            if (jsonld['@graph']) {
+                jsonld['@graph'].forEach(item => {
+                    addNode(item['@id'], item['@id'], { 
+                        url: item['@id'],
+                        bold: true,
+                        type: item['@type'] || 'entity'
+                    });
+                    parseObject(item, item['@id']);
+                });
+            } else {
+                addNode(jsonld['@id'], jsonld['@id'], { 
+                    url: jsonld['@id'],
+                    bold: true,
+                    type: jsonld['@type'] || 'entity'
+                });
+                parseObject(jsonld, jsonld['@id']);
+            }
+        };
+
+        addGraphNodesAndEdges(jsonldData);
+
+        const data = {
+            nodes: new vis.DataSet(nodes),
+            edges: new vis.DataSet(edges)
+        };
+
+        const options = {
+            layout: {
+                hierarchical: layoutSelect.value === 'hierarchical' ? {
+                    direction: 'UD',
+                    sortMethod: 'hubsize',
+                    levelSeparation: 200,
+                    nodeSpacing: 200,
+                    treeSpacing: 200
+                } : false
+            },
+            physics: {
+                enabled: true,
+                stabilization: { 
+                    iterations: 1000,
+                    updateInterval: 50
+                },
+                barnesHut: {
+                    gravitationalConstant: -3000,
+                    centralGravity: 0.2,
+                    springLength: 250,
+                    springConstant: 0.02,
+                    damping: 0.08,
+                    avoidOverlap: 1
+                }
+            },
+            interaction: {
+                hover: true,
+                navigationButtons: true,
+                keyboard: true,
+                tooltipDelay: 200,
+                zoomView: true,
+                hideEdgesOnDrag: true,
+                multiselect: true
+            },
+            nodes: {
+                scaling: {
+                    min: 20,
+                    max: 60
+                }
+            }
+        };
+
+        if (network) {
+            network.setData(data);
+            network.setOptions(options);
+        } else {
+            network = new vis.Network(networkContainer, data, options);
+
+            network.on("doubleClick", params => {
+                const nodeId = network.getNodeAt(params.pointer.DOM);
+                if (nodeId) {
+                    const node = data.nodes.get(nodeId);
+                    if (node.fullUrl) window.open(node.fullUrl, '_blank');
+                }
+            });
+
+            network.on("stabilizationIterationsDone", function () {
+                network.setOptions({ physics: { enabled: false } });
+            });
+
+            network.on("hoverNode", function (params) {
+                const node = data.nodes.get(params.node);
+                if (node.title) {
+                    network.canvas.body.container.title = node.title;
+                }
+            });
+
+            network.on("blurNode", function () {
+                network.canvas.body.container.title = '';
+            });
+        }
+    }
+
+    function searchNodes() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const searchTypeValue = searchType.value;
+
+        network.unselectAll();
+
+        if (searchTerm) {
+            const matchingNodes = network.body.data.nodes.get({
+                filter: node => {
+                    switch(searchTypeValue) {
+                        case 'label':
+                            return node.label && String(node.label).toLowerCase().includes(searchTerm);
+                        case 'id':
+                            return node.id && String(node.id).toLowerCase().includes(searchTerm);
+                        case 'type':
+                            return node.type && String(node.type).toLowerCase().includes(searchTerm);
+                        default:
+                            return false;
+                    }
+                }
+            });
+
+            if (matchingNodes.length > 0) {
+                network.selectNodes(matchingNodes.map(node => node.id));
+                network.focus(matchingNodes[0].id, {
+                    scale: 1.2,
+                    animation: {
+                        duration: 1000,
+                        easingFunction: 'easeInOutQuad'
+                    }
+                });
+            }
+        }
+    }
+
+    layoutSelect.addEventListener('change', updateVisualization);
+    searchInput.addEventListener('input', searchNodes);
+    searchType.addEventListener('change', searchNodes);
+
+    updateVisualization();
+});
+</script>
+{% endblock %}
